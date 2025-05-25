@@ -4,8 +4,8 @@ Concrete MethodModule class for a specific learning MethodModule
 # %%
 import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/venv/Scripts')
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data')
+sys.path.insert(1, '../../')
+sys.path.insert(1, '../../../../data')
 
 # Copyright (c) 2017-Current Jiawei Zhang <jiawei@ifmlab.org>
 # License: TBD
@@ -265,10 +265,3 @@ class Method_CNN(method, nn.Module):
         pred_y = self.test(self.data['test']['X'])
         return {'pred_y': pred_y, 'true_y': self.data['test']['y'], 'curves': self.curves}
             
-# %%
-if __name__ == "__main__":
-    train_loader = Dataset_Loader('train', '')
-    train_loader.dataset_source_folder_path = 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data/stage_4_data/text_classification/'
-    train_loader.dataset_source_file_name = 'train'
-    train_data = train_loader.load()
-    print(train_data)
