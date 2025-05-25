@@ -72,26 +72,24 @@ class Dataset_Loader(dataset):
 
                         for line in f:
                             #print(line)
-                            lines = line.strip('\n').split('.')
-                            num_lines = len(lines)
-                            for n in range(0,10,num_lines):
-                                if n+10<=num_lines:
-                                    input = " ".join(lines[n:n+10])
-                                else:
-                                    input = " ".join(lines[n:])
-
-                                bert_inputs = bert_tokenizer(input, return_tensors='pt')
-                                if bert_inputs['input_ids'].shape[1] < 10:
-                                    continue 
-
-                                with torch.no_grad():
-                                    bert_outputs = bert_model(**bert_inputs)
-                                
-                                temp = bert_outputs.last_hidden_state
-                                print(temp.shape)
-                                X.append(temp)
-                                temp = [0,0]; temp[s] = 1
-                                Y.append(temp)
+                            try:
+                                bert_inputs = bert_tokenizer(line, return_tensors='pt')
+                            except:
+                                lines = line.strip('\n').split('.',2)
+                                num_lines = len(lines)
+                                for input in lines
+                                    bert_inputs = bert_tokenizer(input, return_tensors='pt')
+                                    if bert_inputs['input_ids'].shape[1] < 10:
+                                        continue 
+    
+                                    with torch.no_grad():
+                                        bert_outputs = bert_model(**bert_inputs)
+                                    
+                                    temp = bert_outputs.last_hidden_state
+                                    print(temp.shape)
+                                    X.append(temp)
+                                    temp = [0,0]; temp[s] = 1
+                                    Y.append(temp)
                     except Exception as e:
                         print(f"error:{e}")
 
