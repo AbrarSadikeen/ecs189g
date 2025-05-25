@@ -77,7 +77,7 @@ class Dataset_Loader(dataset):
                             except:
                                 lines = line.strip('\n').split('.',2)
                                 num_lines = len(lines)
-                                for input in lines
+                                for input in lines:
                                     bert_inputs = bert_tokenizer(input, return_tensors='pt')
                                     if bert_inputs['input_ids'].shape[1] < 10:
                                         continue 
