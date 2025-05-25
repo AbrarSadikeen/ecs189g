@@ -28,12 +28,12 @@ if 1:
 
     # ---- objection initialization setction ---------------
     train_loader = Dataset_Loader('train', '')
-    train_loader.dataset_source_folder_path = '../../../../data/stage_4_data/text_classification/'
+    train_loader.dataset_source_folder_path = 'stage_4_data/text_classification/'
     train_loader.dataset_source_file_name = 'train'
     train_data = train_loader.load()
 
     test_loader = Dataset_Loader('test', '')
-    test_loader.dataset_source_folder_path = '../../../../data/stage_4_data/text_classification/'
+    test_loader.dataset_source_folder_path = 'stage_4_data/text_classification/'
     test_loader.dataset_source_file_name = 'test'
     test_data = test_loader.load()
 
@@ -53,7 +53,7 @@ if 1:
     plt.xlabel('epochs')
     plt.ylabel('value')
     plt.legend()
-    plt.savefig('../../../../result/stage_3_result/metrics.png')
+    plt.savefig('result/stage_3_result/metrics.png')
     plt.show()
 
     plt.figure()
@@ -62,7 +62,7 @@ if 1:
     plt.ylabel('loss')
     plt.plot(curves['epochs'],curves['loss'],label='training loss')
     plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
-    plt.savefig('../../../../result/stage_3_result/loss_curve.png')
+    plt.savefig('result/stage_3_result/loss_curve.png')
     plt.legend()
     plt.show()
     
@@ -72,7 +72,7 @@ if 1:
     plt.ylabel('accuracy')
     plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    plt.savefig('../../../../result/stage_3_result/acc_curve.png')
+    plt.savefig('result/stage_3_result/acc_curve.png')
     plt.legend()
     plt.show()
 
@@ -92,7 +92,7 @@ if 1:
     # plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
     # #plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     # #plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    # plt.savefig('../../../../result/stage_3_result/loss_curve.png')
+    # plt.savefig('result/stage_3_result/loss_curve.png')
     # plt.legend()
     # plt.show()
 
@@ -104,7 +104,7 @@ if 1:
     # # plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
     # plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     # plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    # plt.savefig('../../../../result/stage_2_result/loss_curve.png')
+    # plt.savefig('result/stage_2_result/loss_curve.png')
     # plt.legend()
     # plt.show()
 
