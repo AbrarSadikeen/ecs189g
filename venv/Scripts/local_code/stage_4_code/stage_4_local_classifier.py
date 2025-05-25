@@ -89,9 +89,11 @@ class Dataset_Loader(dataset):
                                 num_lines = len(lines)
                                 for n in range(0,20,num_lines):
                                     if n+20<=num_lines:
-                                        input = " ".join(lines[n:n+20])
+                                        input = ". ".join(lines[n:n+20])
+                                        print(input)
                                     else:
-                                        input = " ".join(lines[n:])
+                                        input = ". ".join(lines[n:])
+                                        print(input)
                                     for input in lines:
                                         bert_inputs = bert_tokenizer(input, return_tensors='pt')
                                         if bert_inputs['input_ids'].shape[1] < 10:
