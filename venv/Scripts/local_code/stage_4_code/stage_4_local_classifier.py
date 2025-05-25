@@ -71,7 +71,7 @@ class Dataset_Loader(dataset):
                         f = open(os.path.join(sent_path, item), 'r')
 
                         for line in f:
-                            line = line.strip('\n')
+                            line = line.strip('\n').strip('<br />')
                             try:
                                 bert_inputs = bert_tokenizer(line, return_tensors='pt')
                                 print('not splitting')
@@ -87,14 +87,15 @@ class Dataset_Loader(dataset):
                                 print('splitting')
                                 lines = line.split('.')
                                 num_lines = len(lines)
-                                for n in range(0,10,num_lines):
-                                    if n+10<=num_lines:
-                                        input = ". ".join(lines[n:n+10])
+                                for n in range(0,15,num_lines):
+                                    if n+15<=num_lines:
+                                        input = ". ".join(lines[n:n+15])
                                     else:
-                                        input = ". ".join(lines[n:])
+                                        input = ". ".join(lines[n:num_lines])
 
                                     bert_inputs = bert_tokenizer(input, return_tensors='pt')
                                     if bert_inputs['input_ids'].shape[1] < 10:
+                                        print('skip')
                                         continue 
     
                                     with torch.no_grad():
