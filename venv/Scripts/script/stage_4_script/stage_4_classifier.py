@@ -3,6 +3,10 @@ import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
 sys.path.insert(1, '..')
 sys.path.insert(1, '../../../../data')
+sys.path.append("/content/ecs189g/venv/Scripts/local_code/")
+sys.path.append("/content/ecs189g/venv/Scripts/")
+sys.path.append("/content/ecs189g/data")
+sys.path.append("/content/ecs189g/data/stage_4_data")
 
 from local_code.stage_4_code.stage_4_local_classifier import Method_CNN, Evaluate_Metrics, Dataset_Loader
 #import stage_3_data.script_data_loader
