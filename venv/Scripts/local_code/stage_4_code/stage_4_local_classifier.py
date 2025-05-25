@@ -85,7 +85,7 @@ class Dataset_Loader(dataset):
                                 Y.append(temp)
                             except:
                                 print('splitting')
-                                lines = line.strip('\n').split('.')
+                                lines = line.split('.')
                                 num_lines = len(lines)
                                 for n in range(0,10,num_lines):
                                     if n+10<=num_lines:
