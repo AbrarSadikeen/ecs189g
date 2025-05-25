@@ -6,6 +6,10 @@ import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
 sys.path.insert(1, '../../')
 sys.path.insert(1, '../../../../data')
+sys.path.append("/content/ecs189g/venv/Scripts/local_code/")
+sys.path.append("/content/ecs189g/venv/Scripts/")
+sys.path.append("/content/ecs189g/data")
+sys.path.append("/content/ecs189g/data/stage_4_data")
 
 # Copyright (c) 2017-Current Jiawei Zhang <jiawei@ifmlab.org>
 # License: TBD
