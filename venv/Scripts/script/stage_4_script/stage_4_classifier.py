@@ -1,8 +1,8 @@
 #%%
 import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/venv/Scripts')
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data')
+sys.path.insert(1, '..')
+sys.path.insert(1, '../../../../data')
 
 from local_code.stage_4_code.stage_4_local_classifier import Method_CNN, Evaluate_Metrics, Dataset_Loader
 #import stage_3_data.script_data_loader
@@ -24,12 +24,12 @@ if 1:
 
     # ---- objection initialization setction ---------------
     train_loader = Dataset_Loader('train', '')
-    train_loader.dataset_source_folder_path = 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data/stage_4_data/text_classification/'
+    train_loader.dataset_source_folder_path = '../../../../data/stage_4_data/text_classification/'
     train_loader.dataset_source_file_name = 'train'
     train_data = train_loader.load()
 
     test_loader = Dataset_Loader('test', '')
-    test_loader.dataset_source_folder_path = 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data/stage_4_data/text_classification/'
+    test_loader.dataset_source_folder_path = '../../../../data/stage_4_data/text_classification/'
     test_loader.dataset_source_file_name = 'test'
     test_data = test_loader.load()
 
@@ -49,7 +49,7 @@ if 1:
     plt.xlabel('epochs')
     plt.ylabel('value')
     plt.legend()
-    plt.savefig('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_3_result/metrics.png')
+    plt.savefig('../../../../result/stage_3_result/metrics.png')
     plt.show()
 
     plt.figure()
@@ -58,7 +58,7 @@ if 1:
     plt.ylabel('loss')
     plt.plot(curves['epochs'],curves['loss'],label='training loss')
     plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
-    plt.savefig('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_3_result/loss_curve.png')
+    plt.savefig('../../../../result/stage_3_result/loss_curve.png')
     plt.legend()
     plt.show()
     
@@ -68,7 +68,7 @@ if 1:
     plt.ylabel('accuracy')
     plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    plt.savefig('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_3_result/acc_curve.png')
+    plt.savefig('../../../../result/stage_3_result/acc_curve.png')
     plt.legend()
     plt.show()
 
@@ -88,7 +88,7 @@ if 1:
     # plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
     # #plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     # #plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    # plt.savefig('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_3_result/loss_curve.png')
+    # plt.savefig('../../../../result/stage_3_result/loss_curve.png')
     # plt.legend()
     # plt.show()
 
@@ -100,7 +100,7 @@ if 1:
     # # plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
     # plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     # plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    # plt.savefig('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_2_result/loss_curve.png')
+    # plt.savefig('../../../../result/stage_2_result/loss_curve.png')
     # plt.legend()
     # plt.show()
 
