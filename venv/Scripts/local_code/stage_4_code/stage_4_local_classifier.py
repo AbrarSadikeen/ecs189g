@@ -71,25 +71,38 @@ class Dataset_Loader(dataset):
                         f = open(os.path.join(sent_path, item), 'r')
 
                         for line in f:
-                            #print(line)
+                            line = line.strip('\n')
                             try:
                                 bert_inputs = bert_tokenizer(line, return_tensors='pt')
+                                with torch.no_grad():
+                                    bert_outputs = bert_model(**bert_inputs)
+                                
+                                temp = bert_outputs.last_hidden_state
+                                print(temp.shape)
+                                X.append(temp)
+                                temp = [0,0]; temp[s] = 1
+                                Y.append(temp)
                             except:
-                                lines = line.strip('\n').split('.',2)
+                                lines = line.strip('\n').split('.')
                                 num_lines = len(lines)
-                                for input in lines:
-                                    bert_inputs = bert_tokenizer(input, return_tensors='pt')
-                                    if bert_inputs['input_ids'].shape[1] < 10:
-                                        continue 
-    
-                                    with torch.no_grad():
-                                        bert_outputs = bert_model(**bert_inputs)
-                                    
-                                    temp = bert_outputs.last_hidden_state
-                                    print(temp.shape)
-                                    X.append(temp)
-                                    temp = [0,0]; temp[s] = 1
-                                    Y.append(temp)
+                                for n in range(0,10,num_lines):
+                                    if n+10<=num_lines:
+                                        input = " ".join(lines[n:n+10])
+                                    else:
+                                        input = " ".join(lines[n:])
+                                    for input in lines:
+                                        bert_inputs = bert_tokenizer(input, return_tensors='pt')
+                                        if bert_inputs['input_ids'].shape[1] < 10:
+                                            continue 
+        
+                                        with torch.no_grad():
+                                            bert_outputs = bert_model(**bert_inputs)
+                                        
+                                        temp = bert_outputs.last_hidden_state
+                                        print(temp.shape)
+                                        X.append(temp)
+                                        temp = [0,0]; temp[s] = 1
+                                        Y.append(temp)
                     except Exception as e:
                         print(f"error:{e}")
 
