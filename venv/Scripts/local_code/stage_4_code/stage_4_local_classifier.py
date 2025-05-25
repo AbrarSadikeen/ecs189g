@@ -74,6 +74,7 @@ class Dataset_Loader(dataset):
                             line = line.strip('\n')
                             try:
                                 bert_inputs = bert_tokenizer(line, return_tensors='pt')
+                                print('not splitting')
                                 with torch.no_grad():
                                     bert_outputs = bert_model(**bert_inputs)
                                 
@@ -83,6 +84,7 @@ class Dataset_Loader(dataset):
                                 temp = [0,0]; temp[s] = 1
                                 Y.append(temp)
                             except:
+                                print('splitting')
                                 lines = line.strip('\n').split('.')
                                 num_lines = len(lines)
                                 for n in range(0,10,num_lines):
