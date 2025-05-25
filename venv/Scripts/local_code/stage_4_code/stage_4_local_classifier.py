@@ -87,9 +87,9 @@ class Dataset_Loader(dataset):
                                 print('splitting')
                                 lines = line.split('.')
                                 num_lines = len(lines)
-                                for n in range(0,15,num_lines):
-                                    if n+15<=num_lines:
-                                        input = ". ".join(lines[n:n+15])
+                                for n in range(0,12,num_lines):
+                                    if n+12<=num_lines:
+                                        input = ". ".join(lines[n:n+12])
                                     else:
                                         input = ". ".join(lines[n:num_lines])
 
