@@ -1,10 +1,10 @@
 #%%
 import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/venv/Scripts')
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data')
-sys.path.append('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/venv/Scripts/local_code/stage_5_code')
-sys.path.append('C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/venv/Scripts/local_code/stage_5_code/import_this.py')
+sys.path.insert(1, '/content/ecs189g/venv/Scripts')
+sys.path.insert(1, '/content/drive')
+sys.path.append('/content/ecs189g/venv/Scripts/local_code/stage_5_code')
+sys.path.append('/content/ecs189g/venv/Scripts/local_code/stage_5_code/import_this.py')
 from import_this import Method_GCN, Evaluate_Metrics, Dataset_Loader
 #import stage_3_data.script_data_loader
 import numpy as np
@@ -28,7 +28,7 @@ if 1:
 
     # ---- objection initialization setction ---------------
     data_loader = Dataset_Loader()
-    data_loader.dataset_source_folder_path = 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data/stage_5_data/'
+    data_loader.dataset_source_folder_path = '/content/drive/stage_5_data/'
     data_loader.dataset_source_file_name = 'pubmed'
     data = data_loader.load()
     perm = torch.randperm(len(data['ids']))
@@ -54,7 +54,7 @@ if 1:
     plt.xlabel('epochs')
     plt.ylabel('value')
     plt.legend()
-    plt.savefig(f'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_4_result/metrics_{itr}.png')
+    plt.savefig(f'/content/drive/result/stage_5_result/metrics_{itr}.png')
     #plt.show()
 
     plt.figure()
@@ -63,7 +63,7 @@ if 1:
     plt.ylabel('loss')
     plt.plot(curves['epochs'],curves['loss'],label='training loss')
     plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
-    plt.savefig(f'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_4_result/loss_curve_{itr}.png')
+    plt.savefig(f'/content/drive/result/stage_5_result/loss_curve_{itr}.png')
     plt.legend()
     #plt.show()
     
@@ -73,7 +73,7 @@ if 1:
     plt.ylabel('accuracy')
     plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    plt.savefig(f'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/result/stage_4_result/acc_curve_{itr}.png')
+    plt.savefig(f'/content/drive/result/stage_5_result/acc_curve_{itr}.png')
     plt.legend()
     #plt.show()
 
