@@ -39,7 +39,7 @@ if 1:
     ids_test = data['ids'][ids_test].to(int)
 
     # data["ids"][data["ids"] not in ids_train]
-    method_obj = Method_GCN('node classifier', '', data=data, max_epoch=250, learning_rate=0.01, update_lr=0.7, use_bias=False, hidden_dim_1=32, hidden_dim_2=16, dropout=0.1, weight_decay=0.005, num_layers=3)
+    method_obj = Method_GCN('node classifier', '', data=data, max_epoch=250, learning_rate=0.01, update_lr=0.5, use_bias=False, hidden_dim_1=16, hidden_dim_2=8, dropout=0.1, weight_decay=0.001, num_layers=3)
     method_obj.ids_train = ids_train
     method_obj.ids_test = ids_test
 
@@ -54,7 +54,7 @@ if 1:
     plt.xlabel('epochs')
     plt.ylabel('value')
     plt.legend()
-    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/result/stage_5_result/metrics_{itr}.png')
+    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/results/metrics_{itr}.png')
     #plt.show()
 
     plt.figure()
@@ -63,7 +63,7 @@ if 1:
     plt.ylabel('loss')
     plt.plot(curves['epochs'],curves['loss'],label='training loss')
     plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
-    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/result/stage_5_result/loss_curve_{itr}.png')
+    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/results/loss_curve_{itr}.png')
     plt.legend()
     #plt.show()
     
@@ -73,7 +73,7 @@ if 1:
     plt.ylabel('accuracy')
     plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/result/stage_5_result/acc_curve_{itr}.png')
+    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/results/acc_curve_{itr}.png')
     plt.legend()
     #plt.show()
 
