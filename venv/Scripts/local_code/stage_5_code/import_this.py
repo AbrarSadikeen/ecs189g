@@ -3,8 +3,8 @@ Concrete MethodModule class for a specific learning MethodModule
 '''
 import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/venv/Scripts')
-sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data')
+sys.path.insert(1, '/content/ecs189g/venv/Scripts/')
+# sys.path.insert(1, 'C:/Users/ataki/Documents/ECS189G_Winter_2025_Source_Code_Template/data')
 
 # Copyright (c) 2017-Current Jiawei Zhang <jiawei@ifmlab.org>
 # License: TBD
