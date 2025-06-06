@@ -181,7 +181,7 @@ class Method_GCN(method, nn.Module):
     # it defines the the MLP model architecture, e.g.,
     # how many layers, size of variables in each layer, activation function, etc.
     # the size of the input/output portal of the model architecture should be consistent with our data input and desired output
-    def __init__(self, mName, mDescription, data=data, max_epoch=500, learning_rate = 1e-3, hidden_dim_1=16, hidden_dim_2=64, dropout=0.3, emb_num=500, weight_decay=5e-4, num_classes=3, use_bias=[False, False], update_lr=1, num_layers=2):
+    def __init__(self, mName, mDescription, data=data, max_epoch=500, learning_rate = 1e-3, hidden_dim_1=16, hidden_dim_2=64, dropout=0.3, emb_num=500, weight_decay=5e-4, normalize=False, num_classes=3, use_bias=[False, False], direction="both", update_lr=1, num_layers=2):
         method.__init__(self, mName, mDescription)
         nn.Module.__init__(self)
         self.data = data
@@ -197,15 +197,29 @@ class Method_GCN(method, nn.Module):
         self.edges = self.data['edges']
         self.num_layers = num_layers
 
-        neighbors = []; degrees = []
-        for node_id in range(len(self.edges)):
-            neighbors.append(torch.concatenate([self.edges[self.edges[:,0] == node_id,1].flatten(), self.edges[self.edges[:,1] == node_id, 0].flatten()], dim=0))
-            degrees.append(len(neighbors))
-        print(neighbors[1].shape)
+        if direction == "both":
+            neighbors = []; degrees = []
+            for node_id in range(len(self.edges)):
+                neighbors.append(torch.concatenate([self.edges[self.edges[:,0] == node_id,1].flatten(), self.edges[self.edges[:,1] == node_id, 0].flatten()], dim=0))
+                degrees.append(len(neighbors))
+        elif direction == "in":
+            neighbors = []; degrees = []
+            for node_id in range(len(self.edges)):
+                neighbors.append(self.edges[self.edges[:,1] == node_id, 0].flatten())
+                degrees.append(len(neighbors))
+        elif direction == "out":
+            neighbors = []; degrees = []
+            for node_id in range(len(self.edges)):
+                neighbors.append(self.edges[self.edges[:,0] == node_id,1].flatten())
+                degrees.append(len(neighbors))
+
+        print(degrees)
         degrees = torch.LongTensor(degrees).reshape((-1,1))
+        
         normalizers = []
         for node_id in range(len(self.edges)):
             normalizers.append((degrees[node_id]*degrees[neighbors[node_id]])**(0.5))
+            
         if num_layers == 2:
             self.gcn_1 = GCN_layer(edges=self.data['edges'], in_features=emb_num, out_features=hidden_dim_1, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=[0], normalizers=normalizers)
             self.gcn_2 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_1, out_features=num_classes, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias[1], normalizers=normalizers)
@@ -271,9 +285,12 @@ class Method_GCN(method, nn.Module):
         for param in self.parameters():
             if param.requires_grad:
                 print("Trainable parameter:", param.shape)
-        
-        print('normalizing')
-        X = torch.nn.functional.normalize(self.data["X"], p=2, dim=1)
+
+        if self.normalize:
+            print('normalizing')
+            X = torch.nn.functional.normalize(self.data["X"], p=2, dim=1)
+        else:
+            X = self.data["X"]
         print('splitting dataset')
         X_train = torch.zeros(X.shape)
         X_train[ids_train] = X[ids_train]
