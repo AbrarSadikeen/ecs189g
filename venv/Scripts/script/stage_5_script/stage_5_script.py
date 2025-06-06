@@ -28,7 +28,7 @@ if 1:
 
     # ---- objection initialization setction ---------------
     data_loader = Dataset_Loader()
-    data_loader.dataset_source_folder_path = '/content/drive/stage_5_data/'
+    data_loader.dataset_source_folder_path = 'stage_5_data/'
     data_loader.dataset_source_file_name = 'pubmed'
     data = data_loader.load()
     perm = torch.randperm(len(data['ids']))
