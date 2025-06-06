@@ -181,7 +181,7 @@ class Method_GCN(method, nn.Module):
     # it defines the the MLP model architecture, e.g.,
     # how many layers, size of variables in each layer, activation function, etc.
     # the size of the input/output portal of the model architecture should be consistent with our data input and desired output
-    def __init__(self, mName, mDescription, data=data, max_epoch=500, learning_rate = 1e-3, hidden_dim_1=16, hidden_dim_2=64, dropout=0.3, emb_num=500, weight_decay=5e-4, num_classes=3, use_bias=False, update_lr=1, num_layers=2):
+    def __init__(self, mName, mDescription, data=data, max_epoch=500, learning_rate = 1e-3, hidden_dim_1=16, hidden_dim_2=64, dropout=0.3, emb_num=500, weight_decay=5e-4, num_classes=3, use_bias=[False, False], update_lr=1, num_layers=2):
         method.__init__(self, mName, mDescription)
         nn.Module.__init__(self)
         self.data = data
@@ -207,14 +207,14 @@ class Method_GCN(method, nn.Module):
         for node_id in range(len(self.edges)):
             normalizers.append((degrees[node_id]*degrees[neighbors[node_id]])**(0.5))
         if num_layers == 2:
-            self.gcn_1 = GCN_layer(edges=self.data['edges'], in_features=emb_num, out_features=hidden_dim_1, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias, normalizers=normalizers)
-            self.gcn_2 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_1, out_features=num_classes, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias, normalizers=normalizers)
+            self.gcn_1 = GCN_layer(edges=self.data['edges'], in_features=emb_num, out_features=hidden_dim_1, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=[0], normalizers=normalizers)
+            self.gcn_2 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_1, out_features=num_classes, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias[1], normalizers=normalizers)
             set_up_parameters(self.gcn_1)
             set_up_parameters(self.gcn_2)
         if num_layers == 3:
-            self.gcn_1 = GCN_layer(edges=self.data['edges'], in_features=emb_num, out_features=hidden_dim_2, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias, normalizers=normalizers)
-            self.gcn_2 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_2, out_features=hidden_dim_1, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias, normalizers=normalizers)
-            self.gcn_3 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_1, out_features=num_classes, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias, normalizers=normalizers)
+            self.gcn_1 = GCN_layer(edges=self.data['edges'], in_features=emb_num, out_features=hidden_dim_2, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias[0], normalizers=normalizers)
+            self.gcn_2 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_2, out_features=hidden_dim_1, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias[1], normalizers=normalizers)
+            self.gcn_3 = GCN_layer(edges=self.data['edges'], in_features=hidden_dim_1, out_features=num_classes, neighbors=neighbors, degrees=degrees, dropout=dropout, use_bias=use_bias[2], normalizers=normalizers)
             set_up_parameters(self.gcn_1)
             set_up_parameters(self.gcn_2)
             set_up_parameters(self.gcn_3)
