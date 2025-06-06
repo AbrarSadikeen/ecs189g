@@ -28,7 +28,7 @@ if 1:
 
     # ---- objection initialization setction ---------------
     data_loader = Dataset_Loader()
-    data_loader.dataset_source_folder_path = 'stage_5_data/'
+    data_loader.dataset_source_folder_path = "/content/drive/MyDrive/Computer Science Minor/ECS 189G/stage_5_data/"
     data_loader.dataset_source_file_name = 'pubmed'
     data = data_loader.load()
     perm = torch.randperm(len(data['ids']))
@@ -54,7 +54,7 @@ if 1:
     plt.xlabel('epochs')
     plt.ylabel('value')
     plt.legend()
-    plt.savefig(f'/content/drive/result/stage_5_result/metrics_{itr}.png')
+    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/result/stage_5_result/metrics_{itr}.png')
     #plt.show()
 
     plt.figure()
@@ -63,7 +63,7 @@ if 1:
     plt.ylabel('loss')
     plt.plot(curves['epochs'],curves['loss'],label='training loss')
     plt.plot(curves['epochs'],curves['test loss'],label='testing loss')
-    plt.savefig(f'/content/drive/result/stage_5_result/loss_curve_{itr}.png')
+    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/result/stage_5_result/loss_curve_{itr}.png')
     plt.legend()
     #plt.show()
     
@@ -73,7 +73,7 @@ if 1:
     plt.ylabel('accuracy')
     plt.plot(curves['epochs'],curves['Accuracy'],label='training accuracy')
     plt.plot(curves['epochs'],curves['test accuracy'],label='testing accuracy')
-    plt.savefig(f'/content/drive/result/stage_5_result/acc_curve_{itr}.png')
+    plt.savefig(f'/content/drive/MyDrive/Computer Science Minor/ECS 189G/result/stage_5_result/acc_curve_{itr}.png')
     plt.legend()
     #plt.show()
 
