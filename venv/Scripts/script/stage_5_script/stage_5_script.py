@@ -39,7 +39,7 @@ if 1:
     ids_test = data['ids'][ids_test].to(int)
 
     # data["ids"][data["ids"] not in ids_train]
-    method_obj = Method_GCN('node classifier', '', data=data, max_epoch=250, learning_rate=0.01, update_lr=0.7, use_bias=False, hidden_dim_1=64, hidden_dim_2=16, dropout=0.1, weight_decay=0.0005, num_layers=3)
+    method_obj = Method_GCN('node classifier', '', data=data, max_epoch=250, learning_rate=0.01, update_lr=0.7, use_bias=False, hidden_dim_1=32, hidden_dim_2=16, dropout=0.1, weight_decay=0.005, num_layers=3)
     method_obj.ids_train = ids_train
     method_obj.ids_test = ids_test
 
